@@ -8,6 +8,7 @@ class RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
 
     final suggestions = <WordPair>[];
+    final saved = <WordPair>{};
     const biggerFont = TextStyle(fontSize: 18);
 
     return ListView.builder(
@@ -19,11 +20,28 @@ class RandomWordsState extends State<RandomWords> {
         if (index >= suggestions.length) {
           suggestions.addAll(generateWordPairs().take(10));
         }
+
+        final alreadySaved = saved.contains(suggestions[index]); // boolean to check after if specific word is on the Set.
+
         return ListTile(
           title: Text(
             suggestions[index].asString,
             style: biggerFont,
           ),
+          trailing: Icon(
+            alreadySaved ? Icons.favorite : Icons.favorite_border, // Ternary condition to change icon
+            color: alreadySaved ? Colors.red : null, // Ternary condition to change color
+            semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
+          ),
+          onTap: () {
+            setState(() {
+              if (alreadySaved) {
+                saved.remove(suggestions[index]); // If word is already on set, he is remove of set.
+              } else {
+                saved.add(suggestions[index]); // If word is not on set, he is add.
+              }
+            });
+          },
         );
       },
     );
