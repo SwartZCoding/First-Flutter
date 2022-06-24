@@ -6,23 +6,24 @@ import 'package:english_words/english_words.dart';
 import 'RandomWords.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const StartupNameGenerator());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class StartupNameGenerator extends StatelessWidget {
+
+  const StartupNameGenerator({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
+      title: 'Startup Name Generator', // Name on the header
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
         ),
       ),
-      home: const RandomWords(),
+      home: const RandomWords(), // Name of home widget
     );
   }
 }
