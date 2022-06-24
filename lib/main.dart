@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
+import 'RandomWords.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -17,8 +19,8 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Welcome to Flutter'),
         ),
-        body: Center(
-          child: Text(wordPair.asString),  // Random word parse.
+        body: const Center(
+          child: RandomWords(), // Use new class to random words.
         ),
       ),
     );
