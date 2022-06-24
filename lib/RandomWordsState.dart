@@ -4,14 +4,26 @@ import 'package:flutter/material.dart';
 
 class RandomWordsState extends State<RandomWords> {
 
+  final suggestions = <WordPair>[];
+  final saved = <WordPair>{};
+  static const biggerFont = TextStyle(fontSize: 18);
+
   @override
   Widget build(BuildContext context) {
 
-    final suggestions = <WordPair>[];
-    final saved = <WordPair>{};
-    const biggerFont = TextStyle(fontSize: 18);
+    return Scaffold(
+    appBar: AppBar(
+      title: const Text('Startup Name Generator'),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.list),
+          onPressed: pushSaved,
+          tooltip: 'Saved Suggestions',
+        ),
+      ],
+    ),
 
-    return ListView.builder(
+    body: ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
         if (i.isOdd) return const Divider();
@@ -44,6 +56,40 @@ class RandomWordsState extends State<RandomWords> {
           },
         );
       },
+    ),
+    );
+  }
+
+  void pushSaved() {
+    Navigator.of(context).push(
+      // Add lines from here of liked words.
+      MaterialPageRoute<void>(
+        builder: (context) {
+          final tiles = saved.map(
+                (pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: biggerFont,
+                ),
+              );
+            },
+          );
+          final divided = tiles.isNotEmpty
+              ? ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList()
+              : <Widget>[];
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
+      ), // ...to here.
     );
   }
 }

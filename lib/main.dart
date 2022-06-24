@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
@@ -12,16 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Startup Name Generator',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Startup Name Generator'),
-        ),
-        body: const Center(
-          child: RandomWords(),
-        ),
-      ),
+      home: RandomWords(),
     );
   }
 }
